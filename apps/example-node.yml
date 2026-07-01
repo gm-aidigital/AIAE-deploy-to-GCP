@@ -1,0 +1,28 @@
+app: example-node
+repo: gm-aidigital/example-node
+default_ref: main
+github_environment: prod-example-node
+subdomain: example-node.aidigital.tech
+runtime: node-pm2
+
+build:
+  commands:
+    - npm ci
+    - npm run build
+    - npm prune --omit=dev
+
+start:
+  command: npm run start
+
+artifact:
+  path: .
+  include_node_modules: true
+
+secrets:
+  app_env_b64_required: true
+
+server:
+  port: auto
+  healthcheck: /
+  client_max_body_size: 50M
+  proxy_read_timeout: 600s

@@ -1,0 +1,13 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+dist/
+tmp/
+*.log
+*.pem
+*.key
+__pycache__/
+.pytest_cache/
+.venv/
+

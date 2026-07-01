@@ -1,0 +1,23 @@
+app: example-java
+repo: gm-aidigital/example-java
+default_ref: main
+github_environment: prod-example-java
+subdomain: example-java.aidigital.tech
+runtime: java-systemd
+
+build:
+  commands:
+    - cd frontend && npm ci && npm run build
+    - cd backend && mvn -B verify package
+
+artifact:
+  path: backend/application/target/*.jar
+
+secrets:
+  app_env_b64_required: true
+
+server:
+  port: auto
+  healthcheck: /actuator/health
+  client_max_body_size: 50M
+  proxy_read_timeout: 600s
